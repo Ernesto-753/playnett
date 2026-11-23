@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="inicio.css">
+    <title>PLAYNETT</title>
+    <link type="image/png" rel="icon" href="../img/icon.svg">
+</head>
+<body>
+    <form id="formulario" action="" novalidate>
+        <div class="modo">
+            <a href="../index.html" class="logo" aria-label="Volver a la tienda">← Tienda</a>
+            <h1 id="titulo">Iniciar Sesion</h1>
+            <button type="button" id="btnModo" aria-label="Cambiar tema">🌙</button>
+        </div>
+
+        <p id="aviso" class="aviso" role="status" hidden></p>
+
+        <!-- ===== Registro (caso de uso 1) ===== -->
+        <div class="campo campo--ancho solo-registro" hidden>
+            <label for="apellido">Nombre de usuario:</label>
+            <input type="text" id="apellido" name="apodo" placeholder="Nombre de Jugador" autocomplete="username" maxlength="24">
+            <small id="msg_apodo" class="mensaje"></small>
+        </div>
+
+        <!-- Correo: registro, inicio de sesión y recuperar contraseña -->
+        <div class="campo campo--ancho" id="campo_correo">
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" placeholder="correo@gmail.com" autocomplete="email" required>
+            <small id="msg_correo" class="mensaje"></small>
+        </div>
+
+        <div class="campo campo--ancho solo-registro" hidden>
+            <label for="fechaNacimiento">Fecha de nacimiento:</label>
+            <input type="date" id="fechaNacimiento" name="fechaNacimiento" autocomplete="bday">
+            <small id="msg_fecha" class="mensaje"></small>
+        </div>
+
+        <div class="campo campo--ancho" id="campo_contrasena">
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" placeholder="8+ caracteres, número y símbolo" required>
+            <small id="msg_contrasena" class="mensaje"></small>
+        </div>
+
+        <div class="campo campo--ancho solo-confirmar" hidden>
+            <label for="confirmarContrasena">Confirmar contraseña:</label>
+            <input type="password" id="confirmarContrasena" name="confirmarContrasena" autocomplete="new-password">
+            <small id="msg_confirmar" class="mensaje"></small>
+        </div>
+
+        <label class="check solo-registro" hidden>
+            <input type="checkbox" id="terminos" name="terminos">
+            <span>Acepto los <a href="#" id="verTerminos">términos y condiciones</a></span>
+        </label>
+
+        <!-- ===== Inicio de sesión (caso de uso 2) ===== -->
+        <div class="fila solo-login">
+            <label class="check">
+                <input type="checkbox" id="recordar" name="recordar">
+                <span>Recordar sesión en este dispositivo</span>
+            </label>
+            <a href="#" id="olvide">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <p id="error" class="error" role="alert"></p>
+        <p id="saludo" class="saludo"></p>
+
+        <button id="enviar" class="btn" type="submit">Continuar</button>
+
+        <!-- Iniciar sesión / Registrarse con Google -->
+        <div class="google solo-google">
+            <span class="separador">o</span>
+            <div id="botonGoogle"></div>
+            <button type="button" id="googleNoConfigurado" class="btn-google" hidden>
+                <span aria-hidden="true">G</span> Continuar con Google
+            </button>
+        </div>
+
+        <p class="cambiar-modo">
+            <span id="pregunta">¿No tienes cuenta?</span>
+            <a href="#" id="cambiarModo">Crear cuenta</a>
+        </p>
+    </form>
+
+    <dialog id="dialogoTerminos" class="terminos">
+        <h2>Términos y condiciones</h2>
+        <p>Playnett es un proyecto escolar. Al crear una cuenta aceptas que guardemos tu nombre de usuario, correo,
+            fecha de nacimiento y tus compras de demostración para que la tienda funcione. No se realizan cobros reales
+            y no compartimos tus datos con nadie. Debes tener al menos 13 años.</p>
+        <form method="dialog"><button class="btn">Entendido</button></form>
+    </dialog>
+
+    <script src="inicio.js"></script>
+</body>
+</html>

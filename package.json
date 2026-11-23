@@ -1,0 +1,28 @@
+{
+  "name": "playnett",
+  "version": "1.0.0",
+  "description": "Tienda de videojuegos Playnett con Node, Express y MongoDB",
+  "private": true,
+  "type": "module",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env backend/server.js",
+    "dev": "node --watch --env-file-if-exists=.env backend/server.js",
+    "seed": "node --env-file-if-exists=.env backend/seed.js",
+    "test": "node --env-file-if-exists=.env --test --test-concurrency=1 tests/*.test.js",
+    "test:navegador": "node --env-file-if-exists=.env tests/navegador.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.12.3"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1"
+  }
+}

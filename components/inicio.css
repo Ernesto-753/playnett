@@ -1,0 +1,283 @@
+body {
+    margin: 0;
+
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+
+    background-color: #eef2f7;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    background-image: url("../img/images.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+
+    /* Diseño: tarjeta blanca */
+    background-color: #ffffffcc;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.modo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modo > button{
+    justify-content: end; /* centra el botón en su fila */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    width: 30px;
+}
+
+.modo,
+#formulario button {
+    grid-column: 1 / -1;
+}
+
+#formulario h1 {
+    margin: 0 0 8px;
+    text-align: center;
+    font-size: 24px;
+    color: #17f;
+}
+
+.campo {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 4px;
+}
+
+.campo label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.campo input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: #17f;
+    box-shadow: 0 0 0 3px rgba(17, 119, 255, 0.2);
+}
+
+.btn {
+    justify-self: center;
+    width: 100px;
+    height: 40px;
+
+    background-color: #17f;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #44f;
+}
+
+@media (max-width: 600px) {
+    #formulario {
+        grid-template-columns: 1fr;
+        padding: 24px 16px;
+        border-radius: 0;
+    }
+}
+
+/* ===== Contador ===== */
+.contador {
+    grid-column: 1 / -1; /* ocupa todo el ancho del formulario */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+.contador p {
+    margin: 0;
+    font-size: 15px;
+    color: #888888cc;
+}
+
+.contador span {
+    font-size: 15px;
+    color: #888888cc;
+}
+
+.borrar {
+    padding: 3px;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.borrar:hover{
+    background-color: #e72121aa;
+}
+
+/* ===== Modo oscuro ===== */
+body.dark {
+    background-color: #121212;
+    color: #e0e0e0;
+    
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("img/images.jpg");
+}
+
+body.dark #formulario {
+    background-color: #1e1e1ecc;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+body.dark #formulario h1 {
+    color: #6af;
+}
+
+body.dark .campo input {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+body.dark .campo input::placeholder {
+    color: #888;
+}
+
+body.dark .modo > button {
+    background-color: #333;
+}
+
+body.dark .borrar{
+    background-color: #ccccccdd;
+}
+
+body.dark .borrar:hover{
+    background-color: #8c0b0baa;
+}
+/* ===== Saludo (Practica 5) ===== */
+.saludo {
+    grid-column: 1 / -1;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+    color: #17f;
+}
+
+body.dark .saludo {
+    color: #6af;
+}
+
+/* ===== Cambiar entre iniciar sesión y crear cuenta ===== */
+.solo-registro[hidden] {
+    display: none;
+}
+
+.campo--ancho {
+    grid-column: 1 / -1;
+}
+
+.cambiar-modo {
+    grid-column: 1 / -1;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.cambiar-modo a {
+    color: #17f;
+    font-weight: bold;
+}
+
+.error {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: #d33;
+    font-size: 14px;
+    text-align: center;
+}
+
+.saludo {
+    grid-column: 1 / -1;
+    margin: 0;
+    text-align: center;
+}
+
+/* ===== Casos de uso 1 y 2: registro, inicio de sesión y recuperación ===== */
+[hidden] { display: none !important; }
+
+.modo { align-items: center; gap: 12px; }
+.modo h1 { flex: 1; }
+.logo { color: #17f; font-size: 13px; font-weight: bold; text-decoration: none; }
+
+.btn { width: auto; min-width: 140px; padding: 0 20px; }
+.btn:disabled { opacity: 0.6; cursor: progress; }
+
+.mensaje { font-size: 12px; min-height: 0; }
+.mensaje--ok { color: #1a8f3a; }
+.mensaje--error { color: #d33; }
+
+.check { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
+.check input { width: 16px; height: 16px; accent-color: #17f; }
+.check a, .fila > a, .aviso a { color: #17f; font-weight: bold; }
+
+.fila { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 14px; }
+.fila .check { grid-column: auto; }
+
+.aviso {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(17, 119, 255, 0.1);
+    color: #135;
+    font-size: 14px;
+    text-align: center;
+}
+
+.google { grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.separador { font-size: 13px; color: #888; }
+.btn-google {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 999px;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+}
+.btn-google span { font-weight: bold; color: #4285f4; }
+
+.terminos { max-width: 460px; border: none; border-radius: 12px; padding: 24px; }
+.terminos::backdrop { background: rgba(0, 0, 0, 0.5); }
+.terminos h2 { margin-top: 0; }
+
+body.dark .aviso { background: rgba(102, 170, 255, 0.15); color: #cde; }
+body.dark .check a, body.dark .fila > a, body.dark .aviso a, body.dark .logo { color: #6af; }
+body.dark .mensaje--ok { color: #5c5; }
+body.dark .terminos { background: #1e1e1e; color: #e0e0e0; }

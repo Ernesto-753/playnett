@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playnett</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link type="image/png" rel="icon" href="img/icon.svg">
+
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header__inner container">
+            <a href="index.html" class="logo">
+                <span class="logo__icon">
+                    <img src="img/icon.svg" alt="Icono de Playnett">
+                </span>
+                <span class="logo__text">PLAYNETT</span>
+            </a>
+
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="#catalogo" class="nav__link nav__link--active" data-ruta="catalogo">Catálogo</a></li>
+                    <li><a href="#ofertas" class="nav__link" data-ruta="ofertas">Ofertas</a></li>
+                    <li><a href="#biblioteca" class="nav__link" data-ruta="biblioteca">Biblioteca</a></li>
+                </ul>
+            </nav>
+
+            <form action="#" role="search" class="search">
+                <label for="buscar" class="sr-only">Buscar un videojuego</label>
+                <svg class="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input class="search__input" type="search" id="buscar" name="q" placeholder="Buscar un videojuego..." autocomplete="off" aria-controls="sugerencias" aria-expanded="false">
+                <!-- Caso de uso 4: sugerencias e historial mientras se escribe -->
+                <div id="sugerencias" class="sugerencias" role="listbox" hidden></div>
+            </form>
+
+            <div class="header__actions">
+                <!-- Botón modo claro / oscuro -->
+                <button id="btn_tema" class="tema" aria-label="Cambiar a modo claro">
+                    <!-- Sol: se ve en modo oscuro -->
+                    <svg class="tema__sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/></svg>
+                    <!-- Luna: se ve en modo claro -->
+                    <svg class="tema__luna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+
+                <a href="#favoritos" class="favoritos" data-ruta="favoritos">
+                    <svg id="love-fav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    Favoritos <span id="fav_count" class="favoritos__count">0</span>
+                </a>
+                <!-- Practica 1: este botón se oculta al iniciar sesión -->
+                <a href="components/iniciarSesion.html" id="init_sesion" class="btn btn--primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span id="txt_sesion">Iniciar sesión</span>
+                </a>
+
+                <!-- Usuario: aparece en el mismo lugar del botón al iniciar sesión -->
+                <div id="usuario" class="usuario" style="display: none;">
+                    <button id="btnOcultar" class="usuario__btn" type="button">
+                        <span class="usuario__icono" id="avatar_header">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </span>
+                        <span id="nombre_usuario">Usuario</span>
+                    </button>
+
+                    <!-- Practica 3: menú que se muestra / oculta -->
+                    <div id="texto" class="usuario__menu" style="display: none;">
+                        <a href="#perfil">Mi perfil</a>
+                        <a href="#biblioteca">Mi biblioteca</a>
+                        <a href="#favoritos">Mis favoritos</a>
+                        <button id="cerrar_sesion" type="button">Cerrar sesión</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== CONTENIDO ===== -->
+    <div class="layout container vista" data-vista="catalogo">
+
+        <!-- ===== SIDEBAR / FILTROS ===== -->
+        <aside class="sidebar">
+            <section class="filter">
+                <h2 class="filter__title">Categorías</h2>
+                <ul class="categories">
+                    <li>
+                        <a href="#" class="category category--active" data-categoria="">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                            <span>Todos los juegos</span><span class="category__count"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="category" data-categoria="Acción">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+                            <span>Acción</span><span class="category__count"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="category" data-categoria="Aventura">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                            <span>Aventura</span><span class="category__count"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="category" data-categoria="RPG">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" y1="19" x2="19" y2="13"/><line x1="16" y1="16" x2="20" y2="20"/><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/><line x1="5" y1="14" x2="9" y2="18"/><line x1="7" y1="17" x2="4" y2="20"/></svg>
+                            <span>RPG</span><span class="category__count"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="category" data-categoria="Carreras">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                            <span>Carreras</span><span class="category__count"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="category" data-categoria="Simulación">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="9" height="9" rx="1"/><rect x="12" y="7" width="5" height="5" rx="1"/><rect x="3" y="7" width="5" height="5" rx="1"/><rect x="15" y="3" width="6" height="6" rx="1"/></svg>
+                            <span>Simulación</span><span class="category__count"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="category" data-categoria="Indie">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-5 3.6 1.9-5.8L4 8.8h6.1z"/></svg>
+                            <span>Indie</span><span class="category__count"></span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="filter">
+                <h2 class="filter__title">Precio</h2>
+                <ul class="options">
+                    <li><label class="option"><input type="radio" name="precio" value="" checked> Todos los precios</label></li>
+                    <li><label class="option"><input type="radio" name="precio" value="gratis"> Gratis</label></li>
+                    <li><label class="option"><input type="radio" name="precio" value="menos400"> Menos de $400</label></li>
+                    <li><label class="option"><input type="radio" name="precio" value="400a800"> De $400 a $800</label></li>
+                    <li><label class="option"><input type="radio" name="precio" value="mas800"> Más de $800</label></li>
+                </ul>
+            </section>
+
+            <section class="filter">
+                <h2 class="filter__title">Ofertas</h2>
+                <label class="option"><input type="checkbox" name="oferta" id="solo_ofertas"> Solo juegos en oferta</label>
+            </section>
+        </aside>
+
+        <!-- ===== CATÁLOGO ===== -->
+        <main class="catalog">
+            <div class="catalog__header">
+                <h2 class="catalog__title"><span id="titulo_catalogo">Todos los juegos</span> <span id="total_resultados" class="catalog__results"></span></h2>
+
+                <div class="sort">
+                    <label for="ordenar" class="sort__label">Ordenar por</label>
+                    <select id="ordenar" class="sort__select">
+                        <option value="populares">Más populares</option>
+                        <option value="precio_asc">Precio: menor a mayor</option>
+                        <option value="precio_desc">Precio: mayor a menor</option>
+                        <option value="recientes">Más recientes</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Las tarjetas se generan desde MongoDB (ver script.js) -->
+            <div id="grid" class="grid"></div>
+            <p id="sin_resultados" class="catalog__vacio" hidden>Sin resultados</p>
+
+            <!-- Paginación -->
+            <div class="catalog__bottom">
+                <p id="mostrando" class="catalog__showing"></p>
+                <nav id="paginacion" class="pagination" aria-label="Paginación"></nav>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- ===== VISTAS (una por cada diagrama de casos de uso) ===== -->
+    <main class="vista container pagina" data-vista="juego" hidden><div id="detalle"></div></main>
+
+    <main class="vista container pagina" data-vista="favoritos" hidden>
+        <div class="pagina__header">
+            <h1 class="pagina__titulo">Mis favoritos <span id="fav_total" class="catalog__results"></span></h1>
+        </div>
+        <div id="grid_favoritos" class="grid grid--4"></div>
+        <p id="favoritos_vacio" class="catalog__vacio" hidden>Aún no tienes favoritos. Toca el ♥ de un juego para guardarlo aquí.</p>
+    </main>
+
+    <main class="vista container pagina" data-vista="ofertas" hidden>
+        <div class="pagina__header">
+            <h1 class="pagina__titulo">Ofertas <span id="ofertas_total" class="catalog__results"></span></h1>
+            <div class="sort">
+                <label for="ofertas_categoria" class="sort__label">Categoría</label>
+                <select id="ofertas_categoria" class="sort__select"><option value="">Todas</option></select>
+                <label for="ofertas_orden" class="sort__label">Ordenar por</label>
+                <select id="ofertas_orden" class="sort__select">
+                    <option value="descuento">Mayor descuento</option>
+                    <option value="precio_asc">Precio: menor a mayor</option>
+                    <option value="populares">Más populares</option>
+                </select>
+            </div>
+        </div>
+        <div id="grid_ofertas" class="grid grid--4"></div>
+        <p id="ofertas_vacio" class="catalog__vacio" hidden>No hay ofertas en esta categoría por ahora.</p>
+    </main>
+
+    <main class="vista container pagina" data-vista="comprar" hidden><div id="compra"></div></main>
+
+    <main class="vista container pagina" data-vista="biblioteca" hidden>
+        <div class="pagina__header">
+            <h1 class="pagina__titulo">Mi biblioteca <span id="biblioteca_total" class="catalog__results"></span></h1>
+        </div>
+        <div id="unidades" class="unidades"></div>
+        <div id="lista_biblioteca" class="biblioteca"></div>
+        <p id="biblioteca_vacia" class="catalog__vacio" hidden>Tu biblioteca está vacía. <a href="#catalogo" class="enlace">Explora el catálogo</a>.</p>
+    </main>
+
+    <main class="vista container pagina" data-vista="perfil" hidden><div id="perfil"></div></main>
+
+    <!-- Ventana emergente reutilizable (instalar, desinstalar, confirmar) -->
+    <dialog id="modal" class="modal"></dialog>
+
+    <!-- Avisos (toasts) -->
+    <div id="avisos" class="avisos" aria-live="polite"></div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer__inner container">
+            <span class="footer__brand">PLAYNETT - +67 7531234565</span>
+            <span>Precios en MXN · IVA incluido</span>
+            <a href="#">¿Necesitas ayuda?</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="js/detalle.js"></script>
+    <script src="js/favoritos.js"></script>
+    <script src="js/ofertas.js"></script>
+    <script src="js/compra.js"></script>
+    <script src="js/biblioteca.js"></script>
+    <script src="js/perfil.js"></script>
+    <script src="js/router.js"></script>
+</body>
+</html>
